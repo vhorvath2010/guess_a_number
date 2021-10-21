@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Guess a Number!</title>
+        <link rel="stylesheet" href="index.css">
+    </head>
+    <body>
+        <h1>Guess a Number!</h1>
+        <p>We have selected a number between 1 and 100. See if you can guess it in 10 turns or fewer! We will tell you if your guess is too high or too low</p>
+        <div id="form">
+            <label for="guess">Enter a guess:</label>
+            <input type="number" name="guess" id="guess">
+            <input type="submit" value="Submit" id="submit">
+        </div>
+        <p id="result"></p>
+    </body>
+    <script>
+        let randNum = Math.floor(Math.random() * 100) + 1;
+        let guessCount = 0;
+
+        const guessField = document.getElementById("guess");
+        const submit = document.getElementById("submit");
+        const result = document.getElementById("result");
+
+        submit.addEventListener('click', checkGuess);
+
+        function checkGuess() {
+            let guess = Number(guessField.value);
+            guessCount++;
+            if (guess == randNum) {
+                result.textContent = "You guessed the number!";
+                result.style.backgroundColor = 'green';
+            } else if (guess < randNum) {
+                result.textContent = "Too low! Guesses used: " + guessCount;
+                result.style.backgroundColor = 'teal';
+            } else {
+                result.textContent = "Too high! Guesses used: " + guessCount;
+                result.style.backgroundColor = 'yellow';
+            }
+            guessField.value = 0;
+            guessField.focus();
+        }
+
+    </script>
+</html>
